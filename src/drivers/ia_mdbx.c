@@ -116,7 +116,7 @@ static iacontext *ia_mdbx_thread_new(void) {
     if (rc != MDBX_SUCCESS)
       goto bailout;
 
-    rc = mdbx_dbi_open(txn, NULL, 0, &self->dbi);
+    rc = mdbx_dbi_open(txn, NULL, MDBX_CREATE | MDBX_DUPSORT, &self->dbi);
     err = mdbx_txn_abort(txn);
     if (err != MDBX_SUCCESS)
       ia_log("error: %s, %s (%d)", "mdbx_txn_abort", mdbx_strerror(err), err);

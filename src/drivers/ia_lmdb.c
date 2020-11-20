@@ -101,7 +101,7 @@ static iacontext *ia_lmdb_thread_new(void) {
     if (rc != MDB_SUCCESS)
       goto bailout;
 
-    rc = mdb_dbi_open(txn, NULL, 0, &self->dbi);
+    rc = mdb_dbi_open(txn, "alex", MDB_CREATE | MDB_DUPSORT, &self->dbi);
     mdb_txn_abort(txn);
     if (rc != MDB_SUCCESS)
       goto bailout;
@@ -277,7 +277,8 @@ static int ia_lmdb_next(iacontext *ctx, iabenchmark step, iakv *kv) {
   case IA_GET:
     k.mv_data = kv->k;
     k.mv_size = kv->ksize;
-    rc = mdb_get(ctx->txn, self->dbi, &k, &v);
+    rc = mdbx_cursor_get(ctx->cursor, &k, &v, MDB_GET_BOTH_RANGE);
+    // rc = mdb_get(ctx->txn, self->dbi, &k, &v);
     if (rc != MDB_SUCCESS) {
       if (rc != MDB_NOTFOUND)
         goto bailout;
