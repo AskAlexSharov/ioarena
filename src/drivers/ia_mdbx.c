@@ -279,7 +279,8 @@ static int ia_mdbx_next(iacontext *ctx, iabenchmark step, iakv *kv) {
     k.iov_len = kv->ksize;
     v.iov_base = kv->v;
     v.iov_len = kv->vsize;
-    rc = mdbx_put(ctx->txn, self->dbi, &k, &v, 0);
+    rc = mdb_cursor_put(ctx->cursor, &k, &v, 0);
+    // rc = mdbx_put(ctx->txn, self->dbi, &k, &v, 0);
     if (rc != MDBX_SUCCESS)
       goto bailout;
     break;
@@ -315,7 +316,8 @@ static int ia_mdbx_next(iacontext *ctx, iabenchmark step, iakv *kv) {
   case IA_GET:
     k.iov_base = kv->k;
     k.iov_len = kv->ksize;
-    rc = mdbx_get(ctx->txn, self->dbi, &k, &v);
+    rc = mdbx_cursor_get(ctx->cursor, &k, &v, MDBX_GET_BOTH_RANGE);
+    // rc = mdbx_get(ctx->txn, self->dbi, &k, &v);
     if (rc != MDBX_SUCCESS) {
       if (rc != MDBX_NOTFOUND)
         goto bailout;
