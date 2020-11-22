@@ -45,7 +45,7 @@ static int ia_mdbx_open(const char *datadir) {
 #if 1
       /* 4Gb initial DB size,
        * to make the benchmark conditions the same as for LMDB */
-      4 * giga /* size_lower */, 4 * giga /* size_now */,
+      16 * giga /* size_lower */, 16 * giga /* size_now */,
 #else
       /* dynamic DB size 1Mb..128Gb */
       1 * mega /* size_lower */, 64 * mega /* size_now */,
