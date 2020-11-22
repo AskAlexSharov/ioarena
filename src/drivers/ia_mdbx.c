@@ -60,7 +60,7 @@ static int ia_mdbx_open(const char *datadir) {
     modeflags = MDBX_LIFORECLAIM | MDBX_NORDAHEAD;
     break;
   case IA_LAZY:
-    modeflags = MDBX_SAFE_NOSYNC | MDBX_NOMETASYNC | MDBX_NORDAHEAD;
+    modeflags = MDBX_SAFE_NOSYNC | MDBX_NOMETASYNC | MDBX_LIFORECLAIM | MDBX_NORDAHEAD;
     break;
   case IA_NOSYNC:
     modeflags = MDBX_WRITEMAP | MDBX_UTTERLY_NOSYNC | MDBX_NORDAHEAD;
