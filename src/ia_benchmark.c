@@ -91,8 +91,12 @@ static int ia_run_benchmark(iadoer *doer, iabenchmark bench) {
         goto bailout;
       t0 = ia_timestamp_ns();
       rc = ioarena.driver->begin(doer->ctx, IA_CRUD);
-      if (!rc)
-        rc = ia_quadruple(doer, &a, &b);
+      for (i = 0; rc == 0 && i < 1000;++i) {
+        if (ia_kvgen_get(doer->gen_a, &a, 0) || ia_kvgen_get(doer->gen_b, &b, 0))
+          goto bailout;
+        if (!rc)
+          rc = ia_quadruple(doer, &a, &b);
+      }
       if (!rc)
         rc = ioarena.driver->done(doer->ctx, IA_CRUD);
       ia_histogram_add(&doer->hg, t0,

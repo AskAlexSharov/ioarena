@@ -241,7 +241,8 @@ static int ia_lmdb_next(iacontext *ctx, iabenchmark step, iakv *kv) {
     k.mv_size = kv->ksize;
     v.mv_data = kv->v;
     v.mv_size = kv->vsize;
-    rc = mdb_put(ctx->txn, self->dbi, &k, &v, 0);
+    rc = mdb_cursor_put(ctx->cursor, &k, &v, 0);
+    // rc = mdb_put(ctx->txn, self->dbi, &k, &v, 0);
     if (rc != MDB_SUCCESS)
       goto bailout;
     break;
@@ -277,7 +278,7 @@ static int ia_lmdb_next(iacontext *ctx, iabenchmark step, iakv *kv) {
   case IA_GET:
     k.mv_data = kv->k;
     k.mv_size = kv->ksize;
-    rc = mdbx_cursor_get(ctx->cursor, &k, &v, MDB_GET_BOTH_RANGE);
+    rc = mdb_cursor_get(ctx->cursor, &k, &v, MDB_GET_BOTH_RANGE);
     // rc = mdb_get(ctx->txn, self->dbi, &k, &v);
     if (rc != MDB_SUCCESS) {
       if (rc != MDB_NOTFOUND)
