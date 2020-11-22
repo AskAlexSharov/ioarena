@@ -91,7 +91,7 @@ static int ia_run_benchmark(iadoer *doer, iabenchmark bench) {
         goto bailout;
       t0 = ia_timestamp_ns();
       rc = ioarena.driver->begin(doer->ctx, IA_CRUD);
-      for (i = 0; rc == 0 && i < 1000;++i) {
+      for (i = 0; rc == 0 && i < 100000;++i) {
         if (ia_kvgen_get(doer->gen_a, &a, 0) || ia_kvgen_get(doer->gen_b, &b, 0))
           goto bailout;
         if (!rc)
