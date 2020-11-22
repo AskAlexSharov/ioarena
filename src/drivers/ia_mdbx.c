@@ -57,13 +57,13 @@ static int ia_mdbx_open(const char *datadir) {
 
   switch (ioarena.conf.syncmode) {
   case IA_SYNC:
-    modeflags = MDBX_LIFORECLAIM;
+    modeflags = MDBX_LIFORECLAIM | MDBX_NORDAHEAD;
     break;
   case IA_LAZY:
-    modeflags = MDBX_SAFE_NOSYNC | MDBX_NOMETASYNC;
+    modeflags = MDBX_SAFE_NOSYNC | MDBX_NOMETASYNC | MDBX_NORDAHEAD;
     break;
   case IA_NOSYNC:
-    modeflags = MDBX_WRITEMAP | MDBX_UTTERLY_NOSYNC;
+    modeflags = MDBX_WRITEMAP | MDBX_UTTERLY_NOSYNC | MDBX_NORDAHEAD;
     break;
   default:
     ia_log("error: %s(): unsupported syncmode %s", __func__,

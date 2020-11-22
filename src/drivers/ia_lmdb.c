@@ -42,13 +42,13 @@ static int ia_lmdb_open(const char *datadir) {
   /* LY: suggestions are welcome */
   switch (ioarena.conf.syncmode) {
   case IA_SYNC:
-    modeflags = 0;
+    modeflags = MDB_NORDAHEAD;
     break;
   case IA_LAZY:
-    modeflags = MDB_NOSYNC | MDB_NOMETASYNC;
+    modeflags = MDB_NOSYNC | MDB_NOMETASYNC | MDB_NORDAHEAD;
     break;
   case IA_NOSYNC:
-    modeflags = MDB_WRITEMAP | MDB_MAPASYNC;
+    modeflags = MDB_WRITEMAP | MDB_MAPASYNC | MDB_NORDAHEAD;
     break;
   default:
     ia_log("error: %s(): unsupported syncmode %s", __func__,
