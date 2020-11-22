@@ -35,7 +35,7 @@ static int ia_lmdb_open(const char *datadir) {
   if (rc != MDB_SUCCESS)
     goto bailout;
   /* FIXME: define values via command-line args */
-  rc = mdb_env_set_mapsize(self->env, 4 * 1024 * 1024 * 1024ULL);
+  rc = mdb_env_set_mapsize(self->env, 64 * 1024 * 1024 * 1024ULL);
   if (rc != MDB_SUCCESS)
     goto bailout;
 

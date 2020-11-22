@@ -50,8 +50,8 @@ static int ia_mdbx_open(const char *datadir) {
       /* dynamic DB size 1Mb..128Gb */
       1 * mega /* size_lower */, 64 * mega /* size_now */,
 #endif
-      128 * giga /* size_upper */, 64 * mega /* growth_step */,
-      128 * mega /* shrink_threshold */, -1 /* default pagesize */);
+      128 * giga /* size_upper */, 1 * giga /* growth_step */,
+      2 * giga /* shrink_threshold */, -1 /* default pagesize */);
   if (rc != MDBX_SUCCESS)
     goto bailout;
 
