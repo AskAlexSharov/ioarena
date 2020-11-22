@@ -8,7 +8,7 @@
  */
 
 #include "ioarena.h"
-
+ 
 int ia_configinit(iaconfig *c) {
   c->driver = NULL;
   c->driver_if = NULL;
