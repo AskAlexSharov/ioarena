@@ -46,7 +46,7 @@ static int ia_quadruple(iadoer *doer, iakv *a, iakv *b) {
 
 static int ia_run_benchmark(iadoer *doer, iabenchmark bench) {
   int rc = 0, rc2;
-  uintmax_t i;
+  uintmax_t i, j;
   struct ia_kvpool *pool_a = NULL;
   struct ia_kvpool *pool_b = NULL;
 
@@ -91,7 +91,7 @@ static int ia_run_benchmark(iadoer *doer, iabenchmark bench) {
         goto bailout;
       t0 = ia_timestamp_ns();
       rc = ioarena.driver->begin(doer->ctx, IA_CRUD);
-      for (i = 0; rc == 0 && i < 100000;++i) {
+      for (j = 0; rc == 0 && j < 100000;++j) {
         if (ia_kvgen_get(doer->gen_a, &a, 0) || ia_kvgen_get(doer->gen_b, &b, 0))
           goto bailout;
         if (!rc)
