@@ -21,7 +21,7 @@ int ia_configinit(iaconfig *c) {
   c->csv_prefix = NULL;
   c->rthr = 0;
   c->wthr = 0;
-  c->batch_length = 500;
+  c->batch_length = 10*1000*100;
   c->benchmark = strdup("set, get");
   if (c->benchmark == NULL) {
     free(c->path);
