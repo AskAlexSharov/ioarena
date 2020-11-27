@@ -280,7 +280,7 @@ static int ia_mdbx_next(iacontext *ctx, iabenchmark step, iakv *kv) {
     v.iov_base = kv->v;
     v.iov_len = kv->vsize;
     rc = mdbx_cursor_renew(ctx->txn, ctx->cursor);
-    rc = mdbx_cursor_put(ctx->txn, self->dbi, &k, &v, MDBX_NOOVERWRITE);
+    rc = mdbx_cursor_put(self->dbi, &k, &v, MDBX_NOOVERWRITE);
     if (rc != MDBX_SUCCESS)
       goto bailout;
     break;
