@@ -242,7 +242,7 @@ static int ia_lmdb_next(iacontext *ctx, iabenchmark step, iakv *kv) {
     v.mv_data = kv->v;
     v.mv_size = kv->vsize;
     rc = mdb_cursor_renew(ctx->txn, ctx->cursor);
-    rc = mdb_cursor_put(ctx->txn, self->dbi, &k, &v, MDB_NOOVERWRITE);
+    rc = mdb_cursor_put(self->dbi, &k, &v, MDB_NOOVERWRITE);
     if (rc != MDB_SUCCESS)
       goto bailout;
     break;
